@@ -373,28 +373,6 @@ public class MapsActivity extends Activity {
                            // ParseReadStr(outmessage);
                             ParseReadStrEx(outmessage);
 
-                        /*
-                            try {
-                                if (Float.parseFloat(sbuf[0]) != Float.NaN) {
-                                    corner = Float.parseFloat(sbuf[0]);
-                                }
-                                if (Float.parseFloat(sbuf[1]) != Float.NaN) {
-                                    x = Float.parseFloat(sbuf[1]);
-                                }
-                                if (Float.parseFloat(sbuf[2]) != Float.NaN) {
-                                    y = Float.parseFloat(sbuf[2]);
-                                }
-                            }
-                            catch (Exception e)
-                            {
-                                Log.e(TAG, "--- parse ---");
-                            }
-
-
-                                myAccData=new AccData(corner, x, y); //не тут создавать этот объект
-                                dataAcelGyroList.add(myAccData);
-                        }
-*/
                         textView.setText(outmessage);
 
                     }
