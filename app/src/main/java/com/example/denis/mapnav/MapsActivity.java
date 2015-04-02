@@ -202,7 +202,7 @@ public class MapsActivity extends Activity {
 
     public void sendData()
     {
-        // Create a data stream so we can talk to server.
+        // Create a data stream so we can talk to server.t
 
         if (btSocket==null) {return;}
 
