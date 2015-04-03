@@ -44,6 +44,7 @@ public class MapsActivity extends Activity {
     private boolean buttonClickStart=false;
     DataTreatment myTask=null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,11 +79,16 @@ public class MapsActivity extends Activity {
 
     public void onClickStart(View view) throws IOException {
         if (!buttonClickStart) {
-            btn.setText("Stop");
+            //btn.setText("Stop");
             buttonClickStart = true;
             try {
                 myTask = new DataTreatment();
                 myTask.execute(this);
+                if (myTask.noSocket) {
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Server not running", Toast.LENGTH_LONG);
+                    toast.show();
+                } else btn.setText("Stop");
             } catch (Exception e) {
                 Log.e(TAG, "fkfk");
             }

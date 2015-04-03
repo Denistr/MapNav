@@ -44,6 +44,7 @@ public class DataTreatment extends AsyncTask<Context, AccData, Void> {
 
     private MapsActivity myActivity=null;
     DrawHelper myDraw;
+    public boolean noSocket=true;
 
 
     private BluetoothSocket connectUsingHack(BluetoothDevice device,int channel){
@@ -53,6 +54,7 @@ public class DataTreatment extends AsyncTask<Context, AccData, Void> {
             Method m=device.getClass().getMethod("createRfcommSocket",new Class[] {int.class});
             socket=(BluetoothSocket)m.invoke(device,Integer.valueOf(channel));
             socket.connect();
+            noSocket=false;
             return socket;
         }
         catch (  NoSuchMethodException e) {
@@ -82,8 +84,6 @@ public class DataTreatment extends AsyncTask<Context, AccData, Void> {
 
         }
     }
-
-
             void killApp () {
 
                 try {
@@ -170,9 +170,20 @@ public class DataTreatment extends AsyncTask<Context, AccData, Void> {
 
     }
 
-    public void stopDraw(){
+    public void stopDraw() throws IOException {
 
         needBreak=false;
+        String inputMessage = "p";
+        byte[] msgBuffer = inputMessage.getBytes();
+
+        try {
+            outStream = btSocket.getOutputStream();
+            outStream.write(msgBuffer);
+            outStream.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        btSocket.close();
     }
 
 
@@ -182,7 +193,12 @@ public class DataTreatment extends AsyncTask<Context, AccData, Void> {
         needBreak=true;
         btAdapter = BluetoothAdapter.getDefaultAdapter();
         BluetoothDevice device = btAdapter.getRemoteDevice(MacAdress);
-        btSocket = connectUsingHack(device, 1);
+        try {
+            btSocket = connectUsingHack(device, 1);
+        } catch (Exception e)
+        {
+            Log.e(TAG,"fjfj");
+        }
         myDraw = new DrawHelper(myActivity);
         String inputMessage = "s";
         byte[] msgBuffer = inputMessage.getBytes();
