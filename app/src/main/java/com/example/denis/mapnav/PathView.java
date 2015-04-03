@@ -26,8 +26,8 @@ public class PathView extends View {
     private float sizeY;
     private float sizeRoomX = (float)0.03;
     private float sizeRoomY = (float)0.05;
+    private float XS, YS=0;
 
-    private float maxx, maxy;
 
     public PathView(Context context) {
         super(context);
@@ -59,10 +59,11 @@ public class PathView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        XS=myActivity.outSize.centerX();
+        YS=myActivity.outSize.centerY();
+
         if(myActivity==null) return;
 
-        //sizeX=myActivity.outSize.exactCenterX()/myActivity.getMaxX();
-        //sizeY=myActivity.outSize.exactCenterY()/myActivity.getMaxY();
         sizeX=myActivity.outSize.width()/sizeRoomX;
         sizeY=myActivity.outSize.height()/sizeRoomY;
 
@@ -72,19 +73,18 @@ public class PathView extends View {
         mPaint.setStrokeWidth(3);
 
 
-        if (myActivity. isDataReady==false) {
+        if (myActivity.dataAcelGyroList.size()==0) {
             mPath.reset();
+            mPath.moveTo(XS, YS);
         }else {
-            mPath.moveTo(myActivity.outSize.centerX(), myActivity.outSize.centerY());
-            for (AccData ad:myActivity.dataAcelGyroList)
-            {
+            AccData ad=myActivity.dataAcelGyroList.get(myActivity.dataAcelGyroList.size()-1);
+            if(ad==null) return;
                 try {
-                    mPath.lineTo((ad.getsX() * sizeX) + myActivity.outSize.centerX(), (ad.getsY() * sizeY) + myActivity.outSize.centerY());
+                    mPath.lineTo((ad.getsX() * sizeX) + XS, (ad.getsY() * sizeY) + YS);
                 } catch (Exception e){
                     int z=0;
                 }
             }
-        }
         try {
             canvas.drawPath(mPath, mPaint);
         } catch (Exception e){
@@ -92,6 +92,5 @@ public class PathView extends View {
         }
 
     }
-
 
 }
