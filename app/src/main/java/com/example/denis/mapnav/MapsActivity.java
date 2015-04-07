@@ -98,9 +98,9 @@ public class MapsActivity extends Activity {
             if (myTask!=null) {
                 myTask.stopDraw();
                 dataAcelGyroList.clear();
+                myTask.getBtSocket().close();
             }
             buttonClickStart=false;
-
 
         }
 

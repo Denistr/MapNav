@@ -183,7 +183,7 @@ public class DataTreatment extends AsyncTask<Context, AccData, Void> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        btSocket.close();
+        //btSocket.close();
     }
 
 
@@ -257,5 +257,8 @@ public class DataTreatment extends AsyncTask<Context, AccData, Void> {
         super.onProgressUpdate(values);
 
        myDraw.progressUpdate(values);
+    }
+    public BluetoothSocket getBtSocket(){
+        return btSocket;
     }
 }
