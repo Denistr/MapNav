@@ -48,7 +48,13 @@ public class MapsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        try {
+            setContentView(R.layout.activity_maps); //тут ошибка. вылетает в catch
+        }
+        catch(Exception e)
+        {
+            int z=0;
+        }
         outSize=new Rect();
         display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         if (display==null)
