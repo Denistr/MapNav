@@ -26,8 +26,8 @@ public class PathView extends View {
     private MapsActivity myActivity = null;
     private float sizeX;
     private float sizeY;
-    private float sizeRoomX = (float)0.03;
-    private float sizeRoomY = (float)0.05;
+    private float sizeRoomX = (float)30;
+    private float sizeRoomY = (float)50;
     private float XS, YS=0;
     private Triangle triangle=null;
     private Matrix matrix=null;
@@ -61,7 +61,7 @@ public class PathView extends View {
         paintTri = new Paint();
         paintTri.setStyle(Paint.Style.STROKE);
         paintTri.setAntiAlias(true);
-        paintTri.setColor(Color.GREEN);
+        paintTri.setColor(Color.BLACK);
         paintTri.setStrokeWidth(3);
     mPath = new Path();
     pathTri=new Path();
@@ -93,9 +93,9 @@ public class PathView extends View {
                         pathTri.reset();
 
                     }
-                    mPath.lineTo((ad.getsX() * sizeX) + XS, (ad.getsY() * sizeY) + YS);
-                    pathTri = triangle.drawTriangle((ad.getsX() * sizeX) + XS, (ad.getsY() * sizeY) + YS);//проблема, скорее всего, здесь. Возвращается что-то странное
-                    matrix.setRotate(ad.getCorner(), (ad.getsX() * sizeX) + XS, (ad.getsY() * sizeY) + YS); //применяем матрицу односильно точки, коорд кот. указаны во 2 и 3 парам.
+                    mPath.lineTo(XS+(ad.getsX() * sizeX) , YS- (ad.getsY() * sizeY));
+                    pathTri = triangle.drawTriangle(XS+(ad.getsX() * sizeX) , YS-(ad.getsY() * sizeY) );
+                    matrix.setRotate(ad.getCorner(),XS+(ad.getsX() * sizeX) ,  YS-(ad.getsY() * sizeY)); //применяем матрицу односительно точки, коорд кот. указаны во 2 и 3 парам.
                     pathTri.transform(matrix);
                     pathTriOk=true;
 

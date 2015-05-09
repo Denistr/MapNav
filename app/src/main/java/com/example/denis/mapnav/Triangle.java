@@ -24,7 +24,6 @@ public class Triangle {
          part = Math.sqrt(sizeTriangle*sizeTriangle-(sizeTriangle/2)*(sizeTriangle/2));
          partFloat=(float)part;
         mPath = new Path();
-        //mPath.moveTo(firstX-sizeTriangle/2,firstY+partFloat); //подумать над этим
     }
 
     public Path drawTriangle(float X, float Y){  //новые координаты

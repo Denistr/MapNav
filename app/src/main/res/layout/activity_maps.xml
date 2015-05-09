@@ -1,24 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<TableLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <Button
-        android:id="@+id/btnStart"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClickStart"
-        android:text="@string/Start"
-        android:layout_gravity="right"
-        android:background="@android:color/transparent"/>
+
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+    </TableRow>
+
+    <TableRow android:background="#ffcde0b6">
+
+        <Button
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:text="Fix"
+            style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/Fix"
+            android:layout_column="0"
+            android:background="@drawable/btndraw"
+            android:onClick="onClickFix"
+            android:layout_margin="5dp" />
+
+        <Button
+            android:id="@+id/btnStart"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:onClick="onClickStart"
+            android:text="@string/Start"
+            android:background="@drawable/btndraw"
+            android:layout_column="1"
+            android:layout_margin="5dp" />
+
+    </TableRow>
 
     <com.example.denis.mapnav.PathView
         android:id="@+id/pathView"
         android:layout_width="match_parent"
         android:layout_height="569dp"
         android:layout_marginTop="0dp" />
-</LinearLayout>
+</TableLayout>
 

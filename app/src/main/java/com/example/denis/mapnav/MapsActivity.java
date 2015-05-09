@@ -39,7 +39,7 @@ public class MapsActivity extends Activity {
     Display display=null;
     private View vCanvas;
     ArrayList<AccData> dataAcelGyroList= new ArrayList<>(); //создаем список из 100 эелементов
-    Button btn;
+    Button btn, btnFix;
     private static final String TAG = "BLUESOCKET";
     private boolean buttonClickStart=false;
     DataTreatment myTask=null;
@@ -61,8 +61,12 @@ public class MapsActivity extends Activity {
                 return;
         display.getRectSize(outSize);
         btn = (Button)findViewById(R.id.btnStart);
-        btn.setBackgroundColor(android.R.color.transparent);
+        btnFix=(Button)findViewById(R.id.Fix);
         vCanvas = this.findViewById(R.id.pathView);
+        if (!buttonClickStart)
+        {
+            btnFix.setEnabled(false);
+        }
     }
 
 
@@ -94,7 +98,10 @@ public class MapsActivity extends Activity {
                     Toast toast = Toast.makeText(getApplicationContext(),
                             "Server not running", Toast.LENGTH_LONG);
                     toast.show();
-                } else btn.setText("Stop");
+                } else {
+                    btn.setText("Stop");
+                    btnFix.setEnabled(true);
+                }
             } catch (Exception e) {
                 Log.e(TAG, "fkfk");
             }
@@ -104,12 +111,17 @@ public class MapsActivity extends Activity {
             if (myTask!=null) {
                 myTask.stopDraw();
                 dataAcelGyroList.clear();
-                myTask.getBtSocket().close();
+                myTask.getBtSocket().close(); //переделать тут
             }
             buttonClickStart=false;
-
+            btnFix.setEnabled(false);
         }
 
+    }
+
+    public void onClickFix(View view) throws IOException {
+
+        btnFix.setEnabled(false);
     }
 
 }
